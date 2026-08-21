@@ -122,13 +122,28 @@ var pageTemplate = `<!DOCTYPE html>
         <article class="content">
             <div class="content-header">
                 <div class="eyebrow">{{.SectionName}}</div>
-                <button class="copy-page-button" type="button" data-source="{{.Page.Content}}" aria-label="Copy page as Markdown">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    <span>Copy page</span>
-                </button>
+                <div class="copy-page-group">
+                    <button class="copy-page-button" type="button" data-source="{{.Page.Content}}" aria-label="Copy page as Markdown">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span>Copy page</span>
+                    </button>
+                    <button class="copy-page-dropdown-toggle" type="button" aria-label="More copy options" aria-haspopup="true" aria-expanded="false">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="copy-page-dropdown" role="menu">
+                        <a href="https://github.com/envelope-mx/docs/blob/main/docs/{{.Page.Path}}" target="_blank" rel="noopener" class="copy-page-dropdown-item" role="menuitem">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 3v5a2 2 0 0 0 2 2h5"></path><path d="M6 3h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                            </svg>
+                            <span>View as Markdown</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <div class="prose">

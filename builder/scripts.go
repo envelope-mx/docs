@@ -35,7 +35,9 @@ const jsScript = `/**
     searchModalResults: document.querySelector('.search-modal-results'),
     navSections: document.querySelectorAll('.nav-section'),
     tocNav: document.querySelector('.toc-nav'),
-    copyPageBtn: document.querySelector('.copy-page-button')
+    copyPageBtn: document.querySelector('.copy-page-button'),
+    copyPageDropdownToggle: document.querySelector('.copy-page-dropdown-toggle'),
+    copyPageDropdown: document.querySelector('.copy-page-dropdown')
   };
 
   // ========================================
@@ -328,6 +330,20 @@ const jsScript = `/**
       }
     });
 
+    // Copy page dropdown (View as Markdown, etc.)
+    elements.copyPageDropdownToggle?.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = elements.copyPageDropdown?.classList.toggle('open');
+      elements.copyPageDropdownToggle.setAttribute('aria-expanded', String(!!isOpen));
+    });
+
+    document.addEventListener('click', e => {
+      if (elements.copyPageDropdown?.classList.contains('open') && !e.target.closest('.copy-page-group')) {
+        elements.copyPageDropdown.classList.remove('open');
+        elements.copyPageDropdownToggle?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
     // Mobile menu
     elements.mobileMenuToggle?.addEventListener('click', toggleSidebar);
     elements.sidebarOverlay?.addEventListener('click', closeSidebar);
@@ -367,6 +383,12 @@ const jsScript = `/**
       // Close modal with Escape
       if (e.key === 'Escape' && elements.searchModal?.classList.contains('active')) {
         closeSearchModal();
+      }
+
+      // Close copy-page dropdown with Escape
+      if (e.key === 'Escape' && elements.copyPageDropdown?.classList.contains('open')) {
+        elements.copyPageDropdown.classList.remove('open');
+        elements.copyPageDropdownToggle?.setAttribute('aria-expanded', 'false');
       }
 
       // Navigate results with arrow keys
