@@ -5,10 +5,10 @@ Running the published Docker image directly, with `docker run` — one container
 ## Pull the image
 
 ```bash
-docker pull <registry>/envelope:latest
+docker pull ghcr.io/envelope-mx/envelope:latest
 ```
 
-Replace `<registry>/envelope` with your operator's actual published image path.
+`:latest` tracks the newest non-prerelease tag; pin `:vX.Y.Z` (see the [releases page](https://github.com/envelope-mx/envelope/releases)) instead for anything reproducible.
 
 ## Run
 
@@ -21,7 +21,7 @@ docker run -d --name envelope \
   -e ENVELOPE_API_ADMIN_TOKEN="$(openssl rand -base64 32)" \
   -e ENVELOPE_DOMAIN=mail.yourdomain.example \
   -v envelope-certs:/home/nonroot/.local/share/certmagic \
-  <registry>/envelope:latest
+  ghcr.io/envelope-mx/envelope:latest
 ```
 
 `host.docker.internal` resolves to the host machine on Docker Desktop (Mac/Windows); on native Linux, add `--add-host=host.docker.internal:host-gateway` to the run command, or point `ENVELOPE_DB_HOST` at a real reachable Postgres service instead.
@@ -43,9 +43,9 @@ curl http://localhost:8080/health
 Pass `--roles=<role>` (or your image's equivalent env var/entrypoint arg) to run one role per container instead of everything bundled — useful once you outgrow a single-container deployment but aren't ready for [Kubernetes](kubernetes.md):
 
 ```bash
-docker run -d --name envelope-api    -p 8080:8080 -p 9090:9090 -e ENVELOPE_ROLES=api ...            <registry>/envelope:latest
-docker run -d --name envelope-inbound -p 25:25    -p 9091:9090 -e ENVELOPE_ROLES=smtp-inbound ...    <registry>/envelope:latest
-docker run -d --name envelope-deliverer            -p 9092:9090 -e ENVELOPE_ROLES=deliverer ...      <registry>/envelope:latest
+docker run -d --name envelope-api    -p 8080:8080 -p 9090:9090 -e ENVELOPE_ROLES=api ...            ghcr.io/envelope-mx/envelope:latest
+docker run -d --name envelope-inbound -p 25:25    -p 9091:9090 -e ENVELOPE_ROLES=smtp-inbound ...    ghcr.io/envelope-mx/envelope:latest
+docker run -d --name envelope-deliverer            -p 9092:9090 -e ENVELOPE_ROLES=deliverer ...      ghcr.io/envelope-mx/envelope:latest
 ```
 
 Every container still needs to reach the same Postgres and share the same `ENVELOPE_MASTER_KEY`. For most single-VM deployments, [Docker Compose](docker-compose.md) is a more manageable way to express this than a series of standalone `docker run` commands.

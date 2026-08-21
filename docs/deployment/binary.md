@@ -4,20 +4,29 @@ Running the published `envelope` binary directly on a VM or bare metal — no co
 
 ## 1. Download
 
-Download the release for your platform from the releases page (`https://github.com/<org>/envelope/releases`) and place it on your `PATH`:
+Grab the archive for your platform from the [releases page](https://github.com/envelope-mx/envelope/releases/latest) and extract it. Each archive bundles the `envelope` binary alongside `go.mod` and `config/config.yaml` — keep all three together as extracted (`go.mod` is a marker file, not a build input: Envelope's Goose-based config loader finds its config directory by walking up from the binary's own path looking for `go.mod`, so it can't be moved to `/usr/local/bin` on its own without leaving that marker behind):
 
 ```bash
-curl -Lo envelope https://github.com/<org>/envelope/releases/latest/download/envelope-linux-amd64
-chmod +x envelope
-sudo mv envelope /usr/local/bin/envelope
+VERSION=v0.0.0  # see the releases page for the latest tag
+curl -LO "https://github.com/envelope-mx/envelope/releases/download/$VERSION/envelope_${VERSION}_linux_amd64.tar.gz"
+tar -xzf "envelope_${VERSION}_linux_amd64.tar.gz"
+sudo mv "envelope_${VERSION}_linux_amd64" /opt/envelope
+sudo ln -sf /opt/envelope/envelope /usr/local/bin/envelope
+```
+
+Swap `linux_amd64` for `linux_arm64`, `darwin_amd64`, or `darwin_arm64` for other platforms (Windows ships as a `.zip` with the same layout). Optionally verify the download against that release's `checksums.txt`:
+
+```bash
+curl -LO "https://github.com/envelope-mx/envelope/releases/download/$VERSION/checksums.txt"
+sha256sum -c checksums.txt --ignore-missing
 ```
 
 ## 2. Grant privileged-port capability
 
-Ports 25, 587, and 993 need root or `CAP_NET_BIND_SERVICE`. Rather than running the whole process as root, grant the capability to the binary itself:
+Ports 25, 587, and 993 need root or `CAP_NET_BIND_SERVICE`. Rather than running the whole process as root, grant the capability to the binary itself — set it on the real file in `/opt/envelope`, not the `/usr/local/bin` symlink:
 
 ```bash
-sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/envelope
+sudo setcap 'cap_net_bind_service=+ep' /opt/envelope/envelope
 ```
 
 ## 3. Configure

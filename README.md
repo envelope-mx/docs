@@ -36,13 +36,7 @@ go build -o envelope-docs .
 
 `.github/workflows/deploy.yml` builds and publishes `dist/` to GitHub Pages on every `v*` tag push, using `github.event.repository.name` as the site's base URL — so it publishes to `https://envelope-mx.github.io/docs/` as long as this repository stays named `docs` under the `envelope-mx` org. It assumes this repository itself is public — if it isn't, either make it public or replace the workflow with your own deploy step (any static host works, since the output is plain files).
 
-## Before publishing for real
-
-One placeholder still needs a real value filled in:
-
-- **Registry/release paths** in `docs/deployment/{binary,docker,docker-compose,kubernetes}.md` (`<registry>/envelope`, the GitHub releases URL) — Envelope's core product source isn't public, only its binaries and Docker images are, so these docs deliberately describe *consuming* a published artifact rather than building from source. Point them at wherever those are actually published.
-
-GitHub links (sidebar footer, "Edit this page on GitHub") and the Go module path both already point at this repository's real remote, [envelope-mx/docs](https://github.com/envelope-mx/docs).
+GitHub links (sidebar footer, "Edit this page on GitHub"), the Go module path, and every registry/release reference in `docs/deployment/{binary,docker,docker-compose,kubernetes}.md` all point at the real published locations: [envelope-mx/docs](https://github.com/envelope-mx/docs) for this repository's own remote, [ghcr.io/envelope-mx/envelope](https://github.com/envelope-mx/envelope/pkgs/container/envelope) for the Docker image, and [envelope-mx/envelope releases](https://github.com/envelope-mx/envelope/releases) for binaries.
 
 ## Related repositories
 

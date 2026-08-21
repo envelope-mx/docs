@@ -19,7 +19,7 @@ services:
     ports: ["11333:11333"]
 
   envelope:
-    image: <registry>/envelope:latest
+    image: ghcr.io/envelope-mx/envelope:latest
     depends_on: [postgres, rspamd]
     ports:
       - "25:25"
@@ -42,7 +42,7 @@ volumes:
   envelope-certs:
 ```
 
-Replace `<registry>/envelope:latest` with your operator's actual published image path.
+`:latest` tracks the newest non-prerelease tag; pin `:vX.Y.Z` (see the [releases page](https://github.com/envelope-mx/envelope/releases)) instead for anything reproducible.
 
 ## Bring it up
 

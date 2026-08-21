@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: envelope
-          image: <registry>/envelope:latest
+          image: ghcr.io/envelope-mx/envelope:latest # pin :vX.Y.Z in production
           args: ["--roles=api"]
           envFrom:
             - configMapRef: { name: envelope-config }
