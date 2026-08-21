@@ -18,11 +18,11 @@ const themeSwitchHTML = `<div class="theme-switch" role="group" aria-label="Them
             </div>`
 
 const sidebarFooterHTML = `<div class="sidebar-footer">
-            <a href="https://github.com/isaiahiroko/envelope-docs/issues" target="_blank" rel="noopener" class="sidebar-footer-link">
+            <a href="https://github.com/envelope-mx/docs/issues" target="_blank" rel="noopener" class="sidebar-footer-link">
                 <span>Support</span>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
             </a>
-            <a href="https://github.com/isaiahiroko/envelope-docs" target="_blank" rel="noopener" class="sidebar-footer-link">
+            <a href="https://github.com/envelope-mx/docs" target="_blank" rel="noopener" class="sidebar-footer-link">
                 <span>GitHub</span>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
             </a>
@@ -138,7 +138,7 @@ var pageTemplate = `<!DOCTYPE html>
             <nav class="page-nav">
                 <div class="page-nav-info">
                     <span class="page-nav-edit">
-                        Found an issue? <a href="https://github.com/isaiahiroko/envelope-docs/edit/main/docs/{{.Page.Path}}" target="_blank" rel="noopener">Edit this page on GitHub</a>
+                        Found an issue? <a href="https://github.com/envelope-mx/docs/edit/main/docs/{{.Page.Path}}" target="_blank" rel="noopener">Edit this page on GitHub</a>
                     </span>
                 </div>
             </nav>

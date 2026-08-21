@@ -2,6 +2,10 @@
 
 The source for Envelope's public documentation site — a small Go static-site generator (built on the [Goose framework](https://github.com/awesome-goose/goose), same shape as [awesome-goose/docs](https://github.com/awesome-goose/docs)) plus the Markdown content it builds.
 
+Live site: **https://envelope-mx.github.io/docs/**
+
+Requires Go 1.25+.
+
 ## Structure
 
 ```
@@ -30,12 +34,20 @@ go build -o envelope-docs .
 
 ## Deploying
 
-`.github/workflows/deploy.yml` builds and publishes `dist/` to GitHub Pages on every `v*` tag push. It assumes this repository itself is public — if it isn't, either make it public or replace the workflow with your own deploy step (any static host works, since the output is plain files).
+`.github/workflows/deploy.yml` builds and publishes `dist/` to GitHub Pages on every `v*` tag push, using `github.event.repository.name` as the site's base URL — so it publishes to `https://envelope-mx.github.io/docs/` as long as this repository stays named `docs` under the `envelope-mx` org. It assumes this repository itself is public — if it isn't, either make it public or replace the workflow with your own deploy step (any static host works, since the output is plain files).
 
 ## Before publishing for real
 
-A few placeholders need real values filled in:
+One placeholder still needs a real value filled in:
 
 - **Registry/release paths** in `docs/deployment/{binary,docker,docker-compose,kubernetes}.md` (`<registry>/envelope`, the GitHub releases URL) — Envelope's core product source isn't public, only its binaries and Docker images are, so these docs deliberately describe *consuming* a published artifact rather than building from source. Point them at wherever those are actually published.
-- **GitHub links** in `builder/templates.go` (sidebar footer, "Edit this page on GitHub") currently point at `github.com/isaiahiroko/envelope-docs` — confirm that's this repository's real remote before publishing, or swap it for a "Suggest an edit" contact link if this repo won't be public either.
-- **Module path** in `go.mod` (`github.com/isaiahiroko/envelope-docs`) if this ends up living somewhere else.
+
+GitHub links (sidebar footer, "Edit this page on GitHub") and the Go module path both already point at this repository's real remote, [envelope-mx/docs](https://github.com/envelope-mx/docs).
+
+## Related repositories
+
+| Repository | Description |
+| --- | --- |
+| [envelope-mx/envelope](https://github.com/envelope-mx/envelope) | Core platform (private — binaries and Docker images published, source is not public) |
+| [envelope-mx/index](https://github.com/envelope-mx/index) | Product/technical planning docs this documentation is derived from |
+| [envelope-mx/envelope-mx.github.io](https://github.com/envelope-mx/envelope-mx.github.io) | GitHub Pages entry point that redirects to this site |

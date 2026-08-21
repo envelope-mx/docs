@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/isaiahiroko/envelope-docs/builder"
+	"github.com/envelope-mx/docs/builder"
 )
 
 type AppService struct{}

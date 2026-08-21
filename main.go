@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/isaiahiroko/envelope-docs/app"
+	"github.com/envelope-mx/docs/app"
 
 	"github.com/awesome-goose/goose"
 	"github.com/awesome-goose/goose/log"
