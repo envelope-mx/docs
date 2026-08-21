@@ -13,5 +13,5 @@ One admin bootstrap token creates the first account for a new tenant. From there
 ## Where to start
 
 - New to Envelope? Start with [Introduction](getting-started/introduction.md), then follow the [Quickstart](getting-started/quickstart.md) to send your first email in a few requests.
-- Standing up your own instance? See [Deployment](deployment/overview.md).
+- Standing up your own instance? See [Deploy Envelope](deployment/deploy.md).
 - Integrating against a running instance? Jump straight to the [API Reference](api-reference/overview.md), [Webhooks](webhooks/overview.md), [SMTP](smtp/inbound.md), or [IMAP](imap/overview.md) reference.

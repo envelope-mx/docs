@@ -479,6 +479,65 @@ const jsScript = `/**
   }
 
   // ========================================
+  // Deployment Wizard (docs/deployment/deploy.md) — lets a visitor pick a
+  // deployment method / reverse proxy / TLS approach and enter their own
+  // domains, then shows only the matching steps with those values filled
+  // in. No-op on every other page (bails out if the panel isn't present).
+  // ========================================
+  const DEPLOY_WIZARD_KEY = 'envelope-deploy-wizard';
+
+  function initDeployWizard() {
+    const panel = document.querySelector('.wizard-panel');
+    if (!panel) return;
+
+    const methodSel = document.getElementById('wz-method');
+    const proxySel = document.getElementById('wz-proxy');
+    const tlsSel = document.getElementById('wz-tls');
+    const apiDomainInput = document.getElementById('wz-api-domain');
+    const mailDomainInput = document.getElementById('wz-mail-domain');
+
+    function restore() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(DEPLOY_WIZARD_KEY) || '{}');
+        if (saved.method && methodSel) methodSel.value = saved.method;
+        if (saved.proxy && proxySel) proxySel.value = saved.proxy;
+        if (saved.tls && tlsSel) tlsSel.value = saved.tls;
+        if (saved.apiDomain && apiDomainInput) apiDomainInput.value = saved.apiDomain;
+        if (saved.mailDomain && mailDomainInput) mailDomainInput.value = saved.mailDomain;
+      } catch (e) { /* ignore malformed/blocked storage */ }
+    }
+
+    function render() {
+      const method = methodSel?.value || 'docker-compose';
+      const proxy = proxySel?.value || 'caddy';
+      const tls = tlsSel?.value || 'self-signed';
+      const apiDomain = (apiDomainInput?.value || '').trim() || 'api.yourdomain.example';
+      const mailDomain = (mailDomainInput?.value || '').trim() || 'mail.yourdomain.example';
+
+      document.querySelectorAll('[data-when-method]').forEach(el => {
+        el.style.display = el.getAttribute('data-when-method').split(/\s+/).includes(method) ? '' : 'none';
+      });
+      document.querySelectorAll('[data-when-proxy]').forEach(el => {
+        el.style.display = el.getAttribute('data-when-proxy').split(/\s+/).includes(proxy) ? '' : 'none';
+      });
+      document.querySelectorAll('[data-when-tls]').forEach(el => {
+        el.style.display = el.getAttribute('data-when-tls').split(/\s+/).includes(tls) ? '' : 'none';
+      });
+      document.querySelectorAll('[data-field="apiDomain"]').forEach(el => { el.textContent = apiDomain; });
+      document.querySelectorAll('[data-field="mailDomain"]').forEach(el => { el.textContent = mailDomain; });
+
+      try {
+        localStorage.setItem(DEPLOY_WIZARD_KEY, JSON.stringify({ method, proxy, tls, apiDomain, mailDomain }));
+      } catch (e) { /* ignore blocked storage */ }
+    }
+
+    restore();
+    [methodSel, proxySel, tlsSel].forEach(el => el?.addEventListener('change', render));
+    [apiDomainInput, mailDomainInput].forEach(el => el?.addEventListener('input', render));
+    render();
+  }
+
+  // ========================================
   // Initialize
   // ========================================
   function init() {
@@ -488,6 +547,7 @@ const jsScript = `/**
     initEventListeners();
     initCodeCopyButtons();
     initSmoothScroll();
+    initDeployWizard();
     loadSearchIndex();
   }
 

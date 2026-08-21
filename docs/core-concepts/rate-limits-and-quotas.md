@@ -22,7 +22,7 @@ The REST send endpoint enforces the daily quota but does <strong>not</strong> en
 
 ## The management API's per-IP limit needs a reverse proxy
 
-The client IP for this limiter is read from the `X-Forwarded-For` header — never the raw TCP connection — since the management API has no direct visibility into the connecting socket. If nothing in front of Envelope sets that header, this dimension silently does nothing (every caller is treated as unrateable-by-IP; token auth still protects every endpoint regardless). Both [Caddy](../deployment/reverse-proxy-caddy.md) and [nginx](../deployment/reverse-proxy-nginx.md) reverse-proxy guides show the header configuration this needs.
+The client IP for this limiter is read from the `X-Forwarded-For` header — never the raw TCP connection — since the management API has no direct visibility into the connecting socket. If nothing in front of Envelope sets that header, this dimension silently does nothing (every caller is treated as unrateable-by-IP; token auth still protects every endpoint regardless). See [TLS for the management API](../deployment/deploy.md#tls-for-the-management-api) for the Caddy/nginx header configuration this needs.
 
 No `Retry-After` header is set on any `429`/`452`/`450` response — just the status code and a plain-text message. Build your own backoff.
 
@@ -30,4 +30,4 @@ No `Retry-After` header is set on any `429`/`452`/`450` response — just the st
 
 - [Errors and Responses](errors-and-responses.md)
 - [API Reference → Vhosts](../api-reference/vhosts.md) — setting `dailyQuota` and the other policy fields
-- [Deployment Overview](../deployment/overview.md) — the operator-side environment variables behind the IP-based limits
+- [Deploy Envelope](../deployment/deploy.md) — the operator-side environment variables behind the IP-based limits

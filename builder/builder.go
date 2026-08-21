@@ -290,15 +290,7 @@ var pageOrderMaps = map[string]map[string]int{
 		"authentication.md": 3,
 	},
 	"deployment": {
-		"overview.md":                1,
-		"binary.md":                  2,
-		"docker.md":                  3,
-		"docker-compose.md":          4,
-		"kubernetes.md":              5,
-		"tls-and-certificates.md":    6,
-		"reverse-proxy-caddy.md":     7,
-		"reverse-proxy-nginx.md":     8,
-		"first-boot-and-upgrades.md": 9,
+		"deploy.md": 1,
 	},
 	"core-concepts": {
 		"multi-tenancy.md":          1,

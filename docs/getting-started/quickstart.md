@@ -1,12 +1,12 @@
 # Quickstart
 
-This walks through sending your first email against an already-running Envelope instance, using only `curl`. If you don't have an instance running yet, see [Deployment](../deployment/overview.md) first.
+This walks through sending your first email against an already-running Envelope instance, using only `curl`. If you don't have an instance running yet, see [Deploy Envelope](../deployment/deploy.md) first.
 
 Every request below assumes your instance's management API is reachable at `https://mail.yourdomain.example` — substitute your own host.
 
 ## 1. Create an account
 
-This is the **only** step in the entire flow that needs the admin bootstrap token (`ENVELOPE_API_ADMIN_TOKEN`, see [Deployment Overview](../deployment/overview.md)). Everything after this uses the account's own token.
+This is the **only** step in the entire flow that needs the admin bootstrap token (`ENVELOPE_API_ADMIN_TOKEN`, see [Deploy Envelope](../deployment/deploy.md)). Everything after this uses the account's own token.
 
 ```bash
 curl -X POST https://mail.yourdomain.example/accounts \

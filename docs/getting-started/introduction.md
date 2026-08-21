@@ -37,4 +37,4 @@ Envelope receives mail over SMTP on its own MX-facing port and makes it availabl
 
 - [Quickstart](quickstart.md) — send your first email in three requests
 - [Authentication](authentication.md) — the token model and self-serve onboarding sequence
-- [Deployment](../deployment/overview.md) — if you need to stand up your own instance first
+- [Deploy Envelope](../deployment/deploy.md) — if you need to stand up your own instance first

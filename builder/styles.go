@@ -1347,6 +1347,78 @@ body {
 }
 
 /* ========================================
+   Deployment Wizard (docs/deployment/deploy.md)
+   ======================================== */
+
+.wizard-panel {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0 var(--space-xl);
+}
+
+.wizard-panel-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.wizard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md) var(--space-lg);
+}
+
+.wizard-field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.wizard-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+.wizard-field select,
+.wizard-field input {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 100%;
+}
+
+.wizard-field select:focus,
+.wizard-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.wizard-note {
+  margin-top: var(--space-md);
+  font-size: 0.825rem;
+  color: var(--color-text-muted);
+}
+
+/* Reactive value inserted by the wizard's JS (domain names, etc.) */
+.wz {
+  border-bottom: 1px dotted var(--color-primary);
+}
+
+/* Dimmed inline comment inside a plain (non-Chroma) code block */
+.prose pre .c-cmt { color: var(--color-text-muted); font-style: italic; }
+
+@media (max-width: 640px) {
+  .wizard-grid { grid-template-columns: 1fr; }
+}
+
+/* ========================================
    Chroma syntax highlighting (Envelope theme)
    ======================================== */
 .chroma { color: #ece9e2; }
